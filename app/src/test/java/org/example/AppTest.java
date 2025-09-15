@@ -8,7 +8,18 @@ class AppTest {
   // Feel free to create other files, as needed, to organize your tests
 
   @Test
-  void itWorks() {
-    assertEquals(true, true);
+  void twentyAndOneTest() {
+    Payroll payroll = new Payroll(20, 1);
+    assertEquals(251.7, payroll.getUserNetPay());
+    assertEquals(335.6, payroll.getGrossRate());
+    assertEquals(15, payroll.getExpenses());
+  }
+
+  @Test
+  void fortyAndThreeTest(){
+    Payroll payroll = new Payroll(40, 3);
+    assertEquals(503.4, payroll.getUserNetPay());
+    assertEquals(670.8, payroll.getGrossRate());
+    assertEquals(35, payroll.getExpenses());
   }
 }

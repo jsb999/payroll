@@ -1,5 +1,8 @@
 package org.example;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Payroll{
     private double hoursUserWorked;
     private int userDependents;
@@ -37,11 +40,23 @@ public class Payroll{
 
     public double getUserNetPay(){
         userNetPay = userGrossPay;
-        userNetPay -= (userGrossPay*SS_TAX_PERCENT)/100;
-        userNetPay -= (userGrossPay*FEDERAL_INCOME_TAX_PERCENT)/100;
-        userNetPay -= (userGrossPay*STATE_INCOME_TAX_PERCENT)/100;
-        userNetPay -= UNION_DUES_DOLLARS;
-        userNetPay -= getExpenses();
+        BigDecimal originalValue;
+        BigDecimal roundedValue;
+        
+        originalValue = new BigDecimal((userGrossPay*SS_TAX_PERCENT)/100);
+        roundedValue = originalValue.setScale(2, RoundingMode.HALF_UP);
+        userNetPay -= roundedValue.doubleValue();
+        
+        originalValue = new BigDecimal((userGrossPay*FEDERAL_INCOME_TAX_PERCENT)/100);
+        roundedValue = originalValue.setScale(2, RoundingMode.HALF_UP);
+        userNetPay -= roundedValue.doubleValue();
+        
+        originalValue = new BigDecimal((userGrossPay*STATE_INCOME_TAX_PERCENT)/100);
+        roundedValue = originalValue.setScale(2, RoundingMode.HALF_UP);
+        userNetPay -= roundedValue.doubleValue();
+
+        originalValue = new BigDecimal(userNetPay);
+        userNetPay = originalValue.setScale(2, RoundingMode.HALF_UP).doubleValue();
         return userNetPay;
     }
 

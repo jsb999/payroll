@@ -10,7 +10,7 @@ public class App {
 
     System.out.println("Welcome to the payroll calculator!");
     System.out.println("----------------------------------");
-    System.out.println("Please enter the number of hours/nyou have worked this week:");
+    System.out.println("Please enter the number of hours\nyou have worked this week:");
     hoursUserWorked = scanner.nextDouble();
     System.out.println("How many dependents do you have?");
     userDependents = scanner.nextInt();
